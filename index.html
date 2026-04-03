@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLF LABS | Careers & Jobs A1</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- WOLF LABS SUPREME ENGINE V17.0 (CAREERS EDITION - A1) --- */
+        :root {
+            --bg-base: #0f172a; /* Slate 900 - Deep Blue */
+            --brand-main: #eab308; /* Amber 500 - Gold */
+            --accent: #fde047; /* Amber 300 - Light Gold */
+            --accent-glow: rgba(234, 179, 8, 0.4);
+            --correct: #10b981; /* Emerald */
+            --incorrect: #ef4444; /* Red */
+            --text-main: #FFFFFF;
+            --text-dim: #cbd5e1;
+            --glass-bg: rgba(15, 23, 42, 0.85); 
+            --glass-border: rgba(234, 179, 8, 0.3); 
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        button, input, select, textarea { font-family: var(--font-body); }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            height: 100vh; width: 100vw;
+            display: flex; flex-direction: column;
+            position: fixed; 
+        }
+
+        /* --- IMMERSIVE BACKGROUNDS --- */
+        .ambient-orbs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        .bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1920&auto=format&fit=crop'); /* Modern office vibe */
+            background-size: cover; background-position: center;
+            opacity: 0.15; z-index: 1; filter: grayscale(30%) contrast(120%) brightness(0.4);
+        }
+        .bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(15,23,42,1) 0%, rgba(15,23,42,0.7) 100%);
+            z-index: 2;
+        }
+        .orb { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.15; animation: floatOrb 25s infinite ease-in-out alternate; z-index: 3; }
+        .orb-1 { width: 60vw; height: 60vw; background: var(--brand-main); top: -20%; left: -10%; }
+        .orb-2 { width: 50vw; height: 50vw; background: #3b82f6; bottom: -10%; right: -10%; animation-delay: -5s; }
+
+        @keyframes floatOrb { from { transform: translate(0, 0); } to { transform: translate(30px, 30px); } }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 40px; height: 80px;
+            background: rgba(15,23,42,0.85); backdrop-filter: blur(25px);
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+        .logo { color: #fff; font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 12px;}
+        .logo span { color: #000; font-family: var(--font-body); font-weight: 800; font-size: 0.9rem; padding: 4px 10px; border-radius: 6px; background: var(--brand-main); letter-spacing: 1px;}
+        
+        .nav-controls { display: flex; gap: 15px; }
+        .icon-btn {
+            -webkit-appearance: none; appearance: none; outline: none;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
+            color: white; width: 45px; height: 45px; border-radius: 12px; cursor: pointer;
+            font-size: 1.2rem; transition: 0.3s; backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .icon-btn:hover { background: var(--brand-main); border-color: var(--brand-main); color: #000; transform: translateY(-3px); box-shadow: 0 5px 20px var(--accent-glow); }
+
+        /* --- MAIN CONTAINER --- */
+        .main-container {
+            flex: 1; position: relative; z-index: 10;
+            padding: 100px 3% 100px 3%; 
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide {
+            height: 100%; width: 100%; max-width: 1400px;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .slide.active { display: flex; opacity: 1; }
+
+        /* --- GLASS PANELS --- */
+        .glass-panel {
+            background: var(--glass-bg); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255,255,255,0.05); border-top: 1px solid rgba(234, 179, 8, 0.4);
+            padding: 40px 50px; border-radius: 24px; width: 100%; max-height: 100%; 
+            box-shadow: 0 30px 80px rgba(0,0,0,0.9), inset 0 0 40px rgba(234, 179, 8, 0.05);
+            display: flex; flex-direction: column; justify-content: center;
+            position: relative; overflow-y: auto; scrollbar-width: none;
+        }
+        .glass-panel::-webkit-scrollbar { display: none; }
+        .split-glass { display: grid; grid-template-columns: 1fr; gap: 30px;}
+
+        /* --- TYPOGRAPHY --- */
+        h1 { font-family: var(--font-display); font-size: 5rem; line-height: 1.1; margin-bottom: 20px; color: #fff; text-transform: uppercase; text-shadow: 0 5px 20px rgba(0,0,0,0.6); }
+        h2 { font-family: var(--font-display); font-size: 2.2rem; color: var(--accent); display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+        p { font-size: 1.3rem; line-height: 1.6; color: var(--text-dim); margin-bottom: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); font-weight: 400;}
+        strong { color: #fff; font-weight: 700; }
+
+        /* --- CUSTOM NAME INPUT --- */
+        .name-input {
+            background: rgba(0,0,0,0.5); border: 2px solid rgba(234, 179, 8, 0.4); color: #fff;
+            padding: 16px 25px; border-radius: 12px; font-size: 1.3rem; font-family: var(--font-body);
+            width: 100%; max-width: 350px; text-align: center; margin-bottom: 25px; outline: none; transition: all 0.3s;
+        }
+        .name-input:focus { border-color: var(--brand-main); box-shadow: 0 0 20px var(--accent-glow); background: rgba(234, 179, 8, 0.1); }
+        .name-input::placeholder { color: rgba(255,255,255,0.3); }
+        .dyn-name { color: var(--brand-main); font-weight: 800; text-transform: capitalize; }
+
+        /* --- BUTTONS --- */
+        .btn-start { 
+            -webkit-appearance: none; appearance: none; outline: none;
+            padding: 18px 45px; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; font-weight: 700; font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 12px; background: var(--brand-main); color: #000; box-shadow: 0 10px 30px var(--accent-glow); font-family: var(--font-body);
+        }
+        .btn-start:hover { transform: translateY(-4px); background: #fde047; box-shadow: 0 15px 40px var(--accent-glow); border-color: #fff; color: #000;}
+
+        .options-list { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+        .opt-btn {
+            background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(234, 179, 8, 0.3);
+            color: white; padding: 18px 25px; border-radius: 14px; font-size: 1.25rem; line-height: 1.5;
+            cursor: pointer; text-align: left; transition: all 0.3s ease; font-weight: 500;
+            display: flex; align-items: center; gap: 15px; font-family: var(--font-body);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .opt-btn:hover { background: rgba(234, 179, 8, 0.1); border-color: var(--accent); transform: translateX(8px); }
+        .opt-btn.correct { background: rgba(16, 185, 129, 0.2) !important; border-color: var(--correct) !important; color: white; box-shadow: 0 0 30px rgba(16,185,129,0.3); font-weight: 700;}
+        .opt-btn.error { background: rgba(239, 68, 68, 0.2) !important; border-color: var(--incorrect) !important; animation: shake 0.4s; }
+
+        .choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; width: 100%; }
+        .choice-card { padding: 30px 20px; text-align: center; cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 16px; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%;}
+        .choice-card i { font-size: 3rem; color: var(--brand-main); }
+        .choice-card p { margin: 0; font-weight: 600; font-size: 1.1rem; color: #fff; line-height: 1.4;}
+        .choice-card:hover { background: rgba(255,255,255,0.08); border-color: var(--brand-main); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+        /* --- SPEAKING HUB & STARTERS --- */
+        .speaking-hub { margin-top: 30px; padding: 35px; background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.9)); border-radius: 16px; border: 1px solid var(--accent); position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 0 20px rgba(234, 179, 8,0.1); display: none; text-align: left; width: 100%; }
+        .speaking-hub::before { content: '🎙️ SPEAKING HUB'; position: absolute; top: -14px; left: 30px; background: linear-gradient(90deg, #eab308, #f59e0b); color: #000; font-family: var(--font-code); font-size: 0.8rem; font-weight: 800; padding: 6px 16px; border-radius: 8px; letter-spacing: 2px; box-shadow: 0 5px 15px var(--accent-glow); }
+        .speaking-hub p { color: #fff; font-weight: 500; font-size: 1.3rem; margin-bottom: 0; line-height: 1.6; text-shadow: none;}
+        
+        .speaking-starter { margin-top: 15px; padding: 15px 20px; background: rgba(0, 0, 0, 0.4); border-left: 4px solid var(--accent); border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .starter-title { font-size: 0.8rem; color: var(--accent); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 1px; font-weight: 900; margin-bottom: 5px; }
+        .starter-phrase { font-family: var(--font-code); font-size: 1.3rem; color: #fff; }
+        .starter-phrase span { color: var(--accent); }
+        
+        .follow-up-q { color: var(--accent); font-weight: bold; margin-top: 15px; display: block; border-left: 3px solid var(--accent); padding-left: 12px; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;}
+
+        /* --- VOCAB WORDS --- */
+        .vocab-word { color: #fff; font-family: var(--font-code); font-weight: 600; cursor: pointer; transition: 0.3s; background: rgba(234, 179, 8, 0.15); padding: 4px 10px; border-radius: 8px; display: inline-block; margin: 0 2px; border: 1px solid var(--brand-main); }
+        .vocab-word i { color: var(--brand-main); margin-left: 5px; font-size: 0.9em; transition: 0.3s; }
+        .vocab-word:hover { background: var(--brand-main); color: #000; box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
+        .vocab-word:hover i { color: #000; }
+
+        /* --- BUG HUNT --- */
+        .bug-sentence { background: rgba(0,0,0,0.6); padding: 25px 20px; border-radius: 16px; font-size: 2.2rem; line-height: 1.8; text-align: center; border: 1px dashed var(--glass-border); margin-bottom: 20px; }
+        .bug-word { display: inline-block; padding: 2px 10px; margin: 2px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: 700; border-bottom: 3px solid transparent; }
+        .bug-word:hover { background: rgba(255,255,255,0.1); }
+        .bug-word.wrong-click { color: var(--incorrect); border-bottom-color: var(--incorrect); animation: shake 0.4s; }
+        .bug-word.caught { color: #000; background: var(--correct); border-bottom-color: transparent; transform: scale(1.1); font-weight: 900;}
+
+        /* --- SYNTAX BUILDER --- */
+        .drop-zone { min-height: 140px; border: 2px dashed rgba(255,255,255,0.3); border-radius: 20px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; padding: 25px; gap: 15px; flex-wrap: wrap; background: rgba(0, 0, 0, 0.4); transition: 0.4s; width: 100%;}
+        .drop-zone.success { border-color: var(--correct); border-style: solid; background: rgba(16, 185, 129, 0.1); box-shadow: inset 0 0 30px rgba(16, 185, 129, 0.2); }
+        .word-bank { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 20px; width: 100%;}
+        .word-chip { padding: 16px 32px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; cursor: pointer; user-select: none; transition: all 0.3s; font-weight: 700; color: #fff; font-size: 1.2rem; font-family: var(--font-code); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .word-chip:hover { background: var(--brand-main); color: #000; border-color: var(--brand-main); transform: translateY(-4px); box-shadow: 0 10px 25px var(--accent-glow); }
+        .word-chip.used { opacity: 0; pointer-events: none; transform: scale(0.8); }
+
+        /* --- GRAMMAR SANDBOX --- */
+        .grammar-switch { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; width: 100%; }
+        .switch-btn { background: rgba(0,0,0,0.6); border: 2px solid rgba(255,255,255,0.2); color: white; padding: 12px 30px; border-radius: 500px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; font-family: var(--font-code); }
+        .switch-btn.active { background: var(--brand-main); color: #000; border-color: var(--brand-main); box-shadow: 0 0 20px var(--accent-glow); }
+        .sandbox-display { background: rgba(0,0,0,0.6); padding: 40px; border-radius: 16px; border-left: 4px solid var(--brand-main); min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); text-align: center; width: 100%;}
+
+        /* --- VIDEO WRAPPER --- */
+        .video-wrapper { width: 100%; max-width: 900px; margin: 0 auto; aspect-ratio: 16/9; background: #000; border-radius: 20px; overflow: hidden; border: 2px solid rgba(255,255,255,0.15); box-shadow: 0 25px 60px rgba(0,0,0,0.8); position: relative; margin-bottom: 25px; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* --- NEW GAMIFICATION: MATCH-UP --- */
+        .match-container { display: flex; gap: 20px; justify-content: center; width: 100%; max-width: 900px; margin: 0 auto; flex-wrap: wrap;}
+        .match-col { display: flex; flex-direction: column; gap: 15px; flex: 1; min-width: 250px; width: 100%;}
+        .drag-item { background: var(--brand-main); color: #000; padding: 15px; border-radius: 12px; font-weight: 800; font-size: 1.3rem; text-align: center; cursor: grab; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.2s; border: 2px solid var(--brand-main); user-select: none; position: relative; z-index: 10; font-family: var(--font-body); display: flex; align-items: center; justify-content: center; gap: 10px;}
+        .drag-item:active { cursor: grabbing; transform: scale(0.95); }
+        .drag-item.matched { background: var(--correct); pointer-events: none; border-color: #fff; color: #000;}
+        .drop-target { background: rgba(0,0,0,0.5); border: 2px dashed rgba(255,255,255,0.3); color: #fff; padding: 15px; border-radius: 12px; font-weight: 800; font-size: 1.2rem; text-align: center; min-height: 70px; display: flex; align-items: center; justify-content: center; transition: 0.3s; position: relative; font-family: var(--font-code);}
+
+        /* --- NEW GAMIFICATION: ID CARD MAKER (TABLET) --- */
+        .tablet-wrapper { display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px;}
+        .tablet-device { 
+            width: 380px; height: 550px; background: #0f172a; border: 12px solid #1e293b; 
+            border-radius: 40px; overflow: hidden; display: flex; flex-direction: column; 
+            position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); color: #fff; 
+        }
+        .tablet-header { 
+            background: rgba(31, 41, 55, 0.98); color: var(--accent); text-align: center; padding: 15px; 
+            font-weight: 900; font-size: 1.1rem; text-transform: uppercase; font-family: var(--font-display); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 5; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .tablet-body { 
+            flex: 1; padding: 25px 20px; display: flex; flex-direction: column; gap: 12px; 
+            overflow-y: auto; background: transparent; scrollbar-width: none; align-items: center;
+            justify-content: center;
+        }
+        .tablet-body::-webkit-scrollbar { display: none; }
+        .tablet-item-btn { 
+            display: flex; align-items: center; gap: 15px; background: rgba(30, 41, 59, 0.8); 
+            border: 2px solid var(--glass-border); border-radius: 16px; padding: 15px; 
+            cursor: pointer; transition: 0.2s; width: 100%; justify-content: center;
+        }
+        .tablet-item-btn:hover { border-color: var(--brand-main); background: rgba(234, 179, 8, 0.1); transform: translateY(-3px); box-shadow: 0 8px 15px var(--accent-glow); }
+        .tablet-item-btn:hover .tablet-item-title { color: var(--brand-main); }
+        .tablet-item-title { font-weight: 800; font-size: 1.15rem; color: #fff; margin:0; font-family: var(--font-body); transition: 0.2s;}
+        .id-badge {
+            background: linear-gradient(135deg, #cbd5e1, #f8fafc); color: #0f172a; width: 100%; border-radius: 16px; padding: 25px 20px;
+            display: flex; flex-direction: column; align-items: center; border: 4px solid var(--brand-main);
+            box-shadow: 0 10px 20px rgba(234, 179, 8, 0.3); text-align: center; position: relative;
+        }
+
+        /* --- SMARTPHONE SIMULATOR --- */
+        .phone-ui { width: 100%; max-width: 380px; height: 550px; background: #0f172a; border: 12px solid #1e293b; border-radius: 40px; position: relative; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 22px; background: #1e293b; border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 20; }
+        .phone-top-bar { height: 75px; background: rgba(31, 41, 55, 0.98); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 12px; font-weight: 800; font-size: 1.1rem; z-index: 10; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .phone-chat-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scrollbar-width: none; }
+        .phone-msg { padding: 14px 20px; border-radius: 18px; max-width: 85%; font-size: 1.1rem; line-height: 1.4; animation: popIn 0.3s ease-out forwards; font-weight: 500; text-align: left;}
+        .phone-msg.received { background: #334155; color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .phone-msg.sent { background: var(--brand-main); color: #000; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 700; display: none;}
+        .phone-msg.sent.visible { display: block; }
+        .phone-options-area { padding: 20px; background: rgba(15, 23, 42, 0.98); border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px; z-index: 10; }
+        .phone-opt-btn { 
+            background: rgba(30, 41, 59, 0.8); border: 1px solid var(--accent); color: #fff; 
+            padding: 16px 20px; border-radius: 16px; font-weight: 600; font-size: 1.05rem; 
+            cursor: pointer; transition: all 0.3s; text-align: left; display: block; width: 100%;
+        }
+        .phone-opt-btn:hover { background: var(--brand-main); color: #000; transform: translateY(-2px); box-shadow: 0 5px 15px var(--accent-glow);}
+        
+        .typing-indicator { display: flex; gap: 5px; padding: 14px 20px; background: #334155; border-radius: 18px; align-self: flex-start; border-bottom-left-radius: 4px; animation: popIn 0.3s ease-out forwards; display: none;}
+        .typing-indicator.visible { display: flex; }
+        .dot { width: 8px; height: 8px; background: #9ca3af; border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+        .dot:nth-child(1) { animation-delay: -0.32s; } .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+        @keyframes popIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- ARENA CARDS --- */
+        .arena-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; perspective: 1000px; margin-top: 30px; width: 100%; }
+        .arena-card { background: transparent; min-height: 260px; cursor: pointer; width: 100%; display: block; }
+        .arena-card-inner { position: relative; width: 100%; height: 100%; min-height: 260px; text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+        .arena-card.flipped .arena-card-inner { transform: rotateY(180deg); }
+        .arena-card-front, .arena-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); box-sizing: border-box; }
+        .arena-card-front { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); }
+        .arena-card-front i { font-size: 3.5rem; color: var(--brand-main); margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.5));}
+        .arena-card-front h3 { font-family: var(--font-display); font-size: 1.5rem; color: #fff; letter-spacing: 2px; margin: 0;}
+        .arena-card-back { background: var(--accent); color: #000; transform: rotateY(180deg); box-shadow: 0 15px 40px var(--accent-glow); padding: 20px; }
+        .arena-card-back p { color: #000; font-size: 1.15rem; font-weight: 700; margin: 0; line-height: 1.6; }
+
+        /* --- FOOTER CONTROLS --- */
+        .footer {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 95px;
+            background: rgba(15, 23, 42, 0.95); border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 160; backdrop-filter: blur(25px);
+        }
+        .nav-btn { background: transparent; border: none; color: #9ca3af; padding: 12px 20px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; font-family: var(--font-code); }
+        .nav-btn:hover:not(:disabled) { color: #fff; }
+        .nav-btn.next { background: #fff; color: #000; padding: 16px 45px; border-radius: 12px; box-shadow: 0 8px 25px rgba(255,255,255,0.2); font-size: 1.1rem; letter-spacing: 1px; font-family: var(--font-body); font-weight: 800; }
+        .nav-btn.next:hover:not(:disabled) { background: var(--brand-main); color:#000; box-shadow: 0 12px 35px var(--accent-glow); transform: translateY(-2px);}
+        .progress-container { position: fixed; bottom: 95px; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.05); z-index: 155; }
+        .progress-bar { height: 100%; background: var(--brand-main); width: 0%; transition: 0.5s cubic-bezier(0.25, 1, 0.25, 1); box-shadow: 0 0 15px var(--brand-main);}
+
+        /* --- VISUAL DICTIONARY SIDEBAR --- */
+        .sidebar-panel {
+            position: fixed; top: 0; right: -600px; width: 550px; height: 100vh;
+            background: rgba(15, 23, 42, 0.99); z-index: 210; padding: 90px 50px 50px;
+            transition: right 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex; flex-direction: column; border-left: 1px solid var(--glass-border);
+            box-shadow: -30px 0 80px rgba(0,0,0,0.9); backdrop-filter: blur(40px);
+        }
+        .sidebar-panel.right-open { right: 0; }
+        .sidebar-close { position: absolute; top: 30px; left: 30px; cursor: pointer; font-size: 1.8rem; color: white; background: rgba(255,255,255,0.1); border: none; border-radius: 14px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
+        .sidebar-close:hover { background: var(--incorrect); color: white; transform: rotate(90deg);}
+
+        .dict-word { font-family: var(--font-display); font-size: 3.5rem; color: var(--accent); margin-bottom: 15px; text-transform: uppercase; line-height: 1; }
+        
+        .dict-video-wrapper { width: 100%; height: 300px; border-radius: 16px; border: 1px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 20px; overflow: hidden; display: none; background: #000; position: relative;}
+        .dict-video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .dict-label { color: #fff; font-family: var(--font-code); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 8px; margin-top: 10px; font-weight: 800;}
+        .dict-text { font-size: 1.25rem; line-height: 1.6; color: #d1d5db; font-weight: 400;}
+        .dict-example { font-style: italic; color: #fff; border-left: 4px solid var(--accent); padding-left: 18px; font-size: 1.25rem; font-weight: 300;}
+
+        /* --- WHITEBOARD SIDEBAR --- */
+        .whiteboard-panel { position: fixed; top: 0; left: -600px; width: 550px; height: 100vh; background: rgba(15, 23, 42, 0.99); z-index: 210; padding: 100px 50px 50px; transition: left 0.5s cubic-bezier(0.25, 1, 0.5, 1); display: flex; flex-direction: column; border-right: 1px solid var(--glass-border); box-shadow: 30px 0 80px rgba(0,0,0,0.9); backdrop-filter: blur(40px); }
+        .whiteboard-panel.open { left: 0; }
+        .whiteboard-panel textarea { flex: 1; background: rgba(0,0,0,0.5); border: 2px dashed var(--glass-border); border-radius: 20px; color: var(--accent); font-family: var(--font-code); font-size: 1.3rem; padding: 30px; resize: none; outline: none; transition: 0.3s; line-height: 1.7; margin-top: 20px;}
+        .whiteboard-panel textarea:focus { border-color: var(--brand-main); background: rgba(234, 179, 8, 0.05); }
+
+    </style>
+</head>
+<body>
+
+    <div class="ambient-orbs">
+        <div class="bg-image"></div>
+        <div class="bg-overlay"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo"><i class="fa-solid fa-briefcase" style="color:var(--brand-main); font-size: 1.8rem;"></i> WOLF LABS <span>CAREERS A1</span></div>
+        <div class="nav-controls">
+            <button class="icon-btn" onclick="window.toggleSidebar('whiteboardPanel')" title="Teacher Whiteboard"><i class="fa-solid fa-pen-nib"></i></button>
+            <button class="icon-btn" onclick="window.toggleFullscreen()" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        </div>
+    </nav>
+
+    <!-- Sidebar Dictionary (WITH VIDEO) -->
+    <div class="sidebar-panel" id="vocab-panel" style="border-left-color: var(--accent);">
+        <button class="sidebar-close" onclick="window.toggleSidebar('vocab-panel')"><i class="fa-solid fa-xmark"></i></button>
+        <div id="asideContent" style="margin-top: 10px; padding-bottom: 30px; overflow-y: auto;">
+            <p style="font-family: var(--font-code); color: var(--brand-main); margin-bottom: 10px; font-weight: 700; letter-spacing: 1px;">// WOLF DICTIONARY</p>
+            <h1 id="v-word" class="dict-word">Word</h1>
+            
+            <div id="v-video-wrapper" class="dict-video-wrapper">
+                <iframe id="v-video" data-src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            
+            <div class="dict-label" style="color: #fff;">DEFINITION</div>
+            <p id="v-meaning" class="dict-text">Definition goes here.</p>
+            <div class="dict-label" style="color: #fff; margin-top: 20px;">EXAMPLE</div>
+            <p id="v-example" class="dict-example">...</p>
+            <div style="margin-top: 30px; background: rgba(0,0,0,0.6); border: 1px solid var(--accent); border-radius: 16px; padding: 25px; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+                <span style="position: absolute; top: -12px; left: 20px; background: var(--brand-main); color: #000; font-family: var(--font-code); font-weight: 900; font-size: 0.8rem; letter-spacing: 2px; padding: 6px 14px; border-radius: 6px;">🎙️ SPEAKING HUB</span>
+                <p id="v-question" style="color: #fff; font-size: 1.2rem; font-weight: 600; margin:0; line-height: 1.5;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Whiteboard Panel -->
+    <div class="whiteboard-panel" id="whiteboardPanel">
+        <button onclick="window.toggleSidebar('whiteboardPanel')" style="position: absolute; top: 30px; right: 30px; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 45px; height: 45px; border-radius: 14px; cursor: pointer; transition: 0.3s;"><i class="fa-solid fa-xmark"></i></button>
+        <h2 style="font-size: 2.8rem; color: #fff; margin-bottom: 15px; font-family: var(--font-display); text-transform: uppercase;"><i class="fa-solid fa-chalkboard"></i> WHITEBOARD</h2>
+        <textarea placeholder="// Note down the student's speaking errors and extra vocabulary here..."></textarea>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container" id="slides-container">
+        
+        <!-- 1. TEACHER GUIDE -->
+        <div class="slide active">
+            <div class="glass-panel split-glass">
+                <div class="split-content">
+                    <h2 style="color: #fff; margin-bottom: 15px;"><i class="fa-solid fa-user-shield" style="color: var(--brand-main);"></i> ADMIN PROTOCOL</h2>
+                    <div style="background: rgba(0,0,0,0.5); padding: 30px; border-radius: 16px; font-family: var(--font-code); color: var(--accent); margin-bottom: 25px; border-left: 4px solid var(--brand-main);">
+                        <p style="margin:0;">> TOPIC: Professions & Workplaces</p>
+                        <p style="margin:0;">> LEVEL: A1 Beginner</p>
+                        <p style="margin:0;">> FOCUS: "I am a...", "I work at...", "What do you do?"</p>
+                        <p style="margin:0;">> FORMAT: Masterclass (28 Scenes - Gamified & Conversational)</p>
+                    </div>
+                    <p style="font-size: 1.15rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 35px;">Professor, o vídeo original ("What do you do for a living?") tem vocabulário muito avançado. Como estamos no A1, fizemos <strong>cortes cirúrgicos</strong> de 5 a 10 segundos apenas onde as pessoas dizem a profissão de forma simples ("I am a server", "I am a bartender"). Adicionámos o <strong>ID Maker Simulator</strong>, o <strong>Job Matcher</strong> e novos slides de <strong>Follow-up</strong> após cada vídeo para maximizar a conversação!</p>
+                    <div><button class="btn-start" onclick="window.nextSlide()"><i class="fa-solid fa-power-off"></i> INITIALIZE LESSON</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. COVER -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center; padding: 80px 40px; background: transparent; box-shadow: none; border: none;">
+                <span style="font-family: var(--font-code); color: var(--brand-main); font-weight: 800; letter-spacing: 4px; font-size: 1.2rem; margin-bottom: 15px; display: block;">WOLF LABS INTERACTIVE</span>
+                <h1 style="font-size: 5.5rem; margin-bottom: 20px; line-height: 1; justify-content: center; text-shadow: 0 10px 30px rgba(0,0,0,0.8);">CAREERS &<br>JOBS</h1>
+                <p style="font-size: 1.4rem; margin-bottom: 40px; color: var(--text-dim); max-width: 800px; margin-inline: auto;">Learn how to talk about your job and where you work in English.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 50px; flex-wrap: wrap; width: 100%;">
+                    <span style="border: 1px solid rgba(255,255,255,0.2); color: #fff; background: rgba(0,0,0,0.5); padding: 10px 20px; font-weight: 700; border-radius: 10px; font-size: 1rem;"><i class="fa-solid fa-layer-group" style="color:var(--brand-main); margin-right:8px;"></i> LEVEL A1</span>
+                    <span style="border: 1px solid rgba(255,255,255,0.2); color: #fff; background: rgba(0,0,0,0.5); padding: 10px 20px; font-weight: 700; border-radius: 10px; font-size: 1rem;"><i class="fa-solid fa-microchip" style="color:var(--brand-main); margin-right:8px;"></i> GRAMMAR: I AM A...</span>
+                </div>
+                <div>
+                    <input type="text" id="student-name-input" class="name-input" placeholder="Type your first name..." autocomplete="off" onkeypress="if(event.key === 'Enter') window.saveNameAndStart()">
+                </div>
+                <div>
+                    <button class="btn-start" style="font-size: 1.3rem; padding: 20px 50px;" onclick="window.saveNameAndStart()"><i class="fa-solid fa-briefcase"></i> START WORKING</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. VIBE CHECK -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="text-align:center; padding: 50px 80px;">
+                <h2><i class="fa-solid fa-fire" style="color: var(--brand-main);"></i> VIBE CHECK</h2>
+                <p style="font-size: 1.5rem; margin-bottom: 40px;">Welcome, <span class="dyn-name">Student</span>! Which is true for you?</p>
+                <div class="choice-grid" data-attempts="0" style="max-width: 900px; margin: 0 auto;">
+                    <div class="choice-card" onclick="window.genericCorrect(this, true)">
+                        <i class="fa-solid fa-briefcase"></i><p>I work.</p>
+                    </div>
+                    <div class="choice-card" onclick="window.genericCorrect(this, true)">
+                        <i class="fa-solid fa-graduation-cap"></i><p>I study.</p>
+                    </div>
+                    <div class="choice-card" onclick="window.genericCorrect(this, true)">
+                        <i class="fa-solid fa-bolt"></i><p>I work and study!</p>
+                    </div>
+                </div>
+                <div class="speaking-hub" style="display:block; width: 100%; margin-top: 30px;">
+                    <p>Teacher: Ask the student what their dream job is.</p>
+                    <div class="speaking-starter">
+                        <span class="starter-title">Student Starter</span>
+                        <span class="starter-phrase">"My dream job is..."</span>
+                    </div>
+                    <span class="follow-up-q">🤔 Follow-up: Do you like to work from home or in an office?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= CHUNK 1: THE SERVER ================= -->
+
+        <!-- 4. VOCAB 1: FOOD INDUSTRY -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="padding: 60px 80px; text-align: center;">
+                <h2><i class="fa-solid fa-utensils"></i> Vocabulary 1/3: Food Jobs</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 30px;">Click the words to watch the video dictionary!</p>
+                
+                <div style="display:flex; flex-wrap:wrap; gap: 15px; justify-content:center; max-width:800px; margin:0 auto 30px;">
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('server')">Server <i class="fa-solid fa-circle-play"></i></span>
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('restaurant')">Restaurant</span>
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('food')">Food</span>
+                </div>
+                
+                <div class="speaking-hub" style="display:block; width: 100%;">
+                    <p>Teacher: Explain that "Server" is the modern word for Waiter/Waitress.</p>
+                    <span class="follow-up-q">🤔 Follow-up: Have you ever worked as a server?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. CHUNK 1: VIDEO -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="text-align: center; padding: 60px 80px;">
+                <h2><i class="fa-brands fa-youtube" style="color: var(--brand-main);"></i> Chunk 1: Katie</h2>
+                <p style="font-size: 1.4rem;">Native speakers talk fast! Just focus on the word she says after "I am a...".</p>
+                <div class="video-wrapper">
+                    <!-- Video Chunk 1: 02:16 - 02:22 -->
+                    <iframe data-src="https://www.youtube.com/embed/Zg2_361CgzE?start=136&end=142" allowfullscreen></iframe>
+                </div>
+                <div class="speaking-hub" style="display:block; width: 100%;">
+                    <p>What is Katie's job?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. COMPREHENSION CHECK 1 -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-check-double"></i> Comprehension Check</h2>
+                <p style="font-size: 1.8rem; margin: 40px 0; font-weight: 700;">According to the video, what does Katie do?</p>
+                <div class="options-list" style="grid-template-columns: 1fr; text-align: left;">
+                    <button class="opt-btn" onclick="window.genericCorrect(this, true, 'p_6')"><i class="fa-regular fa-circle"></i> A) She says: "I am a server."</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> B) She says: "I am a student."</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> C) She says: "I am a doctor."</button>
+                </div>
+                <div class="speaking-hub" id="p_6" style="display:none; margin-top: 30px;">
+                    <p>Correct! She is a server.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6.5. NEW: DISCUSSION: THE SERVER -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-comments"></i> Discussion</h2>
+                <p style="font-size: 1.8rem; margin: 40px 0; font-weight: 700;">Does a server talk to a lot of people every day?</p>
+                <div class="options-list" style="grid-template-columns: 1fr 1fr; text-align: center; max-width: 600px; margin: 0 auto;">
+                    <button class="opt-btn" style="justify-content:center;" onclick="window.genericCorrect(this, true, 'p_6_5')"><i class="fa-solid fa-check"></i> Yes, they do.</button>
+                    <button class="opt-btn" style="justify-content:center;" onclick="window.genericCorrect(this, false)"><i class="fa-solid fa-xmark"></i> No, they don't.</button>
+                </div>
+                <div class="speaking-hub" id="p_6_5" style="display:none; margin-top: 30px; text-align: left;">
+                    <p>Yes! Servers talk to many people.</p>
+                    <span class="follow-up-q">🤔 Follow-up: Do you like talking to people at work, or do you prefer to work quietly?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. GRAMMAR 1: I AM A / AN -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center; padding: 60px 80px;">
+                <h2><i class="fa-solid fa-microchip"></i> Grammar: A vs An</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 30px;">To say your profession in English, you MUST use "a" or "an" before the job.</p>
+                
+                <div style="background: rgba(0,0,0,0.5); padding: 40px 50px; border-radius: 20px; border: 1px solid var(--glass-border); margin-bottom: 40px; display: inline-block; text-align: left; box-shadow: inset 0 0 20px rgba(0,0,0,0.3);">
+                    <p style="margin:0; font-size: 1.8rem; color: #fff; margin-bottom: 20px;"><strong style="color:var(--accent);">I am a</strong> server. <span style="font-size: 1.2rem; color: var(--text-dim);">(Starts with Consonant)</span></p>
+                    <p style="margin:0; font-size: 1.8rem; color: #fff; margin-bottom: 20px;"><strong style="color:var(--accent);">I am an</strong> actor. <span style="font-size: 1.2rem; color: var(--text-dim);">(Starts with Vowel)</span></p>
+                    <p style="margin:0; font-size: 1.8rem; color: #fff; padding-top: 20px; border-top: 1px dashed #555;"><i class="fa-solid fa-xmark" style="color:var(--incorrect);"></i> <strong style="color:var(--incorrect);">I am doctor.</strong> <span style="font-size: 1.2rem; color: var(--text-dim);">(Wrong!)</span></p>
+                </div>
+                
+                <div class="speaking-hub" style="display:block; width: 100%; text-align: left;">
+                    <p>Teacher: Explain that in Portuguese we say "Sou médico", mas em Inglês dizemos "Sou UM médico" (I am a doctor).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. GRAMMAR SANDBOX -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align:center; padding: 60px 80px;">
+                <h2><i class="fa-solid fa-sliders"></i> A / An Switcher</h2>
+                <p style="font-size: 1.6rem; margin-bottom: 40px;">Toggle to see the correct rule!</p>
+                
+                <div class="grammar-switch">
+                    <button class="switch-btn active" onclick="window.switchGrammar(this, 'I am A teacher.', 'Consonant', 'sandbox-sentence-mov', 'sandbox-certainty-mov')">Teacher</button>
+                    <button class="switch-btn" onclick="window.switchGrammar(this, 'I am AN engineer.', 'Vowel', 'sandbox-sentence-mov', 'sandbox-certainty-mov')">Engineer</button>
+                    <button class="switch-btn" onclick="window.switchGrammar(this, 'I am A student.', 'Consonant', 'sandbox-sentence-mov', 'sandbox-certainty-mov')">Student</button>
+                </div>
+                
+                <div class="sandbox-display">
+                    <div id="sandbox-certainty-mov" style="color: var(--brand-main); font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 20px; font-weight: 800; font-family: var(--font-code);">Consonant</div>
+                    <span id="sandbox-sentence-mov" style="color: #fff; font-size: 3rem; font-weight: 700; line-height: 1.4;">I am A teacher.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. SYNTAX BUILDER 1 -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-layer-group"></i> Syntax Builder 1/2</h2>
+                <p style="font-size: 1.4rem;">Build the sentence correctly.</p>
+                <div class="drop-zone" id="dz_1" data-attempts="0"></div>
+                <div class="word-bank">
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_1', 'I,am,a,server.', 'p_dz1')">a</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_1', 'I,am,a,server.', 'p_dz1')">I</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_1', 'I,am,a,server.', 'p_dz1')">server.</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_1', 'I,am,a,server.', 'p_dz1')">am</button>
+                </div>
+                <div class="speaking-hub" id="p_dz1" style="display:none; text-align: left;">
+                    <p>Awesome! Don't forget the "a".</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= CHUNK 2: THE BARISTA & WORKPLACES ================= -->
+
+        <!-- 10. VOCAB 2: THE CAFE -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="padding: 60px 80px; text-align: center;">
+                <h2><i class="fa-solid fa-mug-hot"></i> Vocabulary 2/3: Drinks</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 30px;">Let's learn about coffee shops.</p>
+                
+                <div style="display:flex; flex-wrap:wrap; gap: 15px; justify-content:center; max-width:800px; margin:0 auto 30px;">
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('barista')">Barista <i class="fa-solid fa-circle-play"></i></span>
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('coffee shop')">Coffee Shop</span>
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('work at')">Work at <i class="fa-solid fa-circle-play"></i></span>
+                </div>
+                
+                <div class="speaking-hub" style="display:block; width: 100%;">
+                    <p>Teacher: What does a Barista do?</p>
+                    <span class="follow-up-q">🤔 Follow-up: Do you like coffee or tea?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. CHUNK 2: VIDEO -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="text-align: center; padding: 60px 80px;">
+                <h2><i class="fa-brands fa-youtube" style="color: var(--brand-main);"></i> Chunk 2: Cameron</h2>
+                <p style="font-size: 1.4rem;">Listen to Cameron. He says his job and WHERE he works.</p>
+                <div class="video-wrapper">
+                    <!-- Video Chunk 2: 03:44 - 03:53 -->
+                    <iframe data-src="https://www.youtube.com/embed/Zg2_361CgzE?start=224&end=233" allowfullscreen></iframe>
+                </div>
+                <div class="speaking-hub" style="display:block; width: 100%;">
+                    <p>Where does he work?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. COMPREHENSION CHECK 2 -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-check-double"></i> Comprehension Check</h2>
+                <p style="font-size: 1.8rem; margin: 40px 0; font-weight: 700;">According to the video, where does Cameron work?</p>
+                <div class="options-list" style="grid-template-columns: 1fr; text-align: left;">
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> A) He works in an office.</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, true, 'p_12')"><i class="fa-regular fa-circle"></i> B) He works at Starbucks.</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> C) He works at a restaurant.</button>
+                </div>
+                <div class="speaking-hub" id="p_12" style="display:none; margin-top: 30px;">
+                    <p>Correct! "I work here at Starbucks."</p>
+                    <span class="follow-up-q">🤔 Follow-up: Do you like Starbucks?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12.5. NEW: LISTEN FOR DETAILS -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-ear-listen"></i> Listen for Details</h2>
+                <p style="font-size: 1.8rem; margin: 40px 0; font-weight: 700;">What is the Barista's name?</p>
+                <div class="options-list" style="grid-template-columns: repeat(3, 1fr); text-align: center; max-width: 800px; margin: 0 auto;">
+                    <button class="opt-btn" style="justify-content:center;" onclick="window.genericCorrect(this, false)">Calvin</button>
+                    <button class="opt-btn" style="justify-content:center;" onclick="window.genericCorrect(this, true, 'p_12_5')">Cameron</button>
+                    <button class="opt-btn" style="justify-content:center;" onclick="window.genericCorrect(this, false)">Carter</button>
+                </div>
+                <div class="speaking-hub" id="p_12_5" style="display:none; margin-top: 30px; text-align: left;">
+                    <p>Spot on! His name is Cameron.</p>
+                    <span class="follow-up-q">🤔 Follow-up: Is Cameron a common name in your country? What is a common name?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 13. GRAMMAR 2: I WORK AT -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center; padding: 60px 80px;">
+                <h2><i class="fa-solid fa-microchip"></i> Grammar: Places of Work</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 30px;">To say the company or specific place you work for, use "AT".</p>
+                
+                <div style="background: rgba(0,0,0,0.5); padding: 40px 50px; border-radius: 20px; border: 1px solid var(--glass-border); margin-bottom: 40px; display: inline-block; text-align: left; box-shadow: inset 0 0 20px rgba(0,0,0,0.3);">
+                    <p style="margin:0; font-size: 1.8rem; color: #fff; margin-bottom: 20px;"><i class="fa-solid fa-check" style="color:var(--correct); margin-right:15px;"></i> I work <strong style="color:var(--brand-main);">at</strong> Starbucks.</p>
+                    <p style="margin:0; font-size: 1.8rem; color: #fff; margin-bottom: 20px;"><i class="fa-solid fa-check" style="color:var(--correct); margin-right:15px;"></i> She works <strong style="color:var(--brand-main);">at</strong> a hospital.</p>
+                    <p style="margin:0; font-size: 1.8rem; color: #fff; padding-top: 20px; border-top: 1px dashed #555;"><i class="fa-solid fa-xmark" style="color:var(--incorrect);"></i> <strong style="color:var(--incorrect);">I work on Starbucks.</strong> <span style="font-size: 1.2rem; color: var(--text-dim);">(Wrong!)</span></p>
+                </div>
+                
+                <div class="speaking-hub" style="display:block; width: 100%; text-align: left;">
+                    <p>Teacher: Ask the student: "Where do you work?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 14. NEW: THE JOB MATCHER -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center; padding: 40px 60px;">
+                <h2><i class="fa-solid fa-puzzle-piece"></i> Job Matcher</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 30px;">Drag the profession to the correct workplace!</p>
+                
+                <div class="match-container">
+                    <div class="match-col" id="drag-source-jobs">
+                        <div class="drag-item" draggable="true" ondragstart="window.wwDragStart(event)" id="drag-barista" data-match="coffee">Barista</div>
+                        <div class="drag-item" draggable="true" ondragstart="window.wwDragStart(event)" id="drag-server" data-match="restaurant">Server</div>
+                        <div class="drag-item" draggable="true" ondragstart="window.wwDragStart(event)" id="drag-doctor" data-match="hospital">Doctor</div>
+                    </div>
+                    <div class="match-col">
+                        <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.4rem; font-weight:bold; width: 180px; text-align:right;">Works at a coffee shop:</span><div class="drop-target" ondragover="window.wwAllowDrop(event)" ondrop="window.wwDropJob(event, 'coffee')" style="flex:1;">_____</div></div>
+                        <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.4rem; font-weight:bold; width: 180px; text-align:right;">Works at a hospital:</span><div class="drop-target" ondragover="window.wwAllowDrop(event)" ondrop="window.wwDropJob(event, 'hospital')" style="flex:1;">_____</div></div>
+                        <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.4rem; font-weight:bold; width: 180px; text-align:right;">Works at a restaurant:</span><div class="drop-target" ondragover="window.wwAllowDrop(event)" ondrop="window.wwDropJob(event, 'restaurant')" style="flex:1;">_____</div></div>
+                    </div>
+                </div>
+
+                <div class="speaking-hub" id="p_match" style="display:none; margin-top: 30px; text-align: left;">
+                    <p>Perfect logic! You matched them correctly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 15. BUG HUNT (At vs In) -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center; padding: 60px 80px;">
+                <h2><i class="fa-solid fa-bug"></i> Catch the Bug 1/2</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 30px;">Tap the <strong>wrong word</strong> to fix it.</p>
+                
+                <div class="bug-sentence">
+                    <span class="bug-word" onclick="window.catchBug(this, false)">I</span> 
+                    <span class="bug-word" onclick="window.catchBug(this, false)">work</span> 
+                    <span class="bug-word" onclick="window.catchBug(this, true, 'at', 'p_bug1')">in</span> 
+                    <span class="bug-word" onclick="catchBug(this, false)">Starbucks.</span>
+                </div>
+
+                <div class="speaking-hub" id="p_bug1" style="display:none; width: 100%; text-align: left;">
+                    <p>Yes! We say "I work AT Starbucks".</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= CHUNK 3: THE QUESTION ================= -->
+
+        <!-- 16. VOCAB 3: BARTENDER & QUESTION -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="padding: 60px 80px; text-align: center;">
+                <h2><i class="fa-solid fa-martini-glass-citrus"></i> Vocabulary 3/3: Nightlife</h2>
+                
+                <div style="display:flex; flex-wrap:wrap; gap: 15px; justify-content:center; max-width:800px; margin:0 auto 30px;">
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('bartender')">Bartender <i class="fa-solid fa-circle-play"></i></span>
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('bar')">Bar</span>
+                    <span class="vocab-word" style="font-size:1.6rem; padding: 15px 30px;" onclick="window.openVocab('for a living')">For a living <i class="fa-solid fa-circle-play"></i></span>
+                </div>
+                
+                <div class="speaking-hub" style="display:block; width: 100%;">
+                    <p>Teacher: Explain that "What do you do for a living?" is exactly the same as "What is your job?".</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 17. CHUNK 3: VIDEO -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="text-align: center; padding: 60px 80px;">
+                <h2><i class="fa-brands fa-youtube" style="color: var(--brand-main);"></i> Chunk 3: Jacob</h2>
+                <p style="font-size: 1.4rem;">Listen to the interviewer ask the famous question.</p>
+                <div class="video-wrapper">
+                    <!-- Video Chunk 3: 05:57 - 06:05 -->
+                    <iframe data-src="https://www.youtube.com/embed/Zg2_361CgzE?start=357&end=365" allowfullscreen></iframe>
+                </div>
+                <div class="speaking-hub" style="display:block; width: 100%;">
+                    <p>What does Jacob do for a living?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 17.5. NEW: COMPREHENSION CHECK 3 -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-check-double"></i> Comprehension Check</h2>
+                <p style="font-size: 1.8rem; margin: 40px 0; font-weight: 700;">What is Jacob's job?</p>
+                <div class="options-list" style="grid-template-columns: 1fr; text-align: left;">
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> A) He is a barista.</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, true, 'p_17_5')"><i class="fa-regular fa-circle"></i> B) He is a bartender.</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> C) He is a server.</button>
+                </div>
+                <div class="speaking-hub" id="p_17_5" style="display:none; margin-top: 30px; text-align: left;">
+                    <p>Correct! He works as a bartender.</p>
+                    <span class="follow-up-q">🤔 Follow-up: What is the difference between a Barista and a Bartender? (Hint: Coffee vs. Alcohol)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 18. THE GOLDEN QUESTION -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-star"></i> The Golden Question</h2>
+                <p style="font-size: 1.8rem; margin: 40px 0; font-weight: 700;">When Americans say "What do you do for a living?", what do they mean?</p>
+                <div class="options-list" style="grid-template-columns: 1fr; text-align: left;">
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> A) Where do you live?</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, true, 'p_18')"><i class="fa-regular fa-circle"></i> B) What is your job?</button>
+                    <button class="opt-btn" onclick="window.genericCorrect(this, false)"><i class="fa-regular fa-circle"></i> C) Are you alive?</button>
+                </div>
+                <div class="speaking-hub" id="p_18" style="display:none; margin-top: 30px;">
+                    <p>Exactly! It is the most common way to ask someone about their career in the USA.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 19. SYNTAX BUILDER 2 -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align: center;">
+                <h2><i class="fa-solid fa-layer-group"></i> Syntax Builder 2/2</h2>
+                <p style="font-size: 1.4rem;">Build the question correctly!</p>
+                <div class="drop-zone" id="dz_2" data-attempts="0"></div>
+                <div class="word-bank">
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_2', 'What,do,you,do,for,a,living?', 'p_dz2')">living?</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_2', 'What,do,you,do,for,a,living?', 'p_dz2')">do</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_2', 'What,do,you,do,for,a,living?', 'p_dz2')">What</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_2', 'What,do,you,do,for,a,living?', 'p_dz2')">for</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_2', 'What,do,you,do,for,a,living?', 'p_dz2')">a</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_2', 'What,do,you,do,for,a,living?', 'p_dz2')">you</button>
+                    <button class="word-chip" onclick="window.moveWord(this, 'dz_2', 'What,do,you,do,for,a,living?', 'p_dz2')">do</button>
+                </div>
+                <div class="speaking-hub" id="p_dz2" style="display:none; text-align: left;">
+                    <p>Awesome! Now ask the teacher: "What do you do for a living?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 20. LIVE CHAT SCENARIO -->
+        <div class="slide">
+            <div class="glass-panel" style="text-align:center; padding: 40px 60px;">
+                <h2><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> TEXTING A NEW FRIEND</h2>
+                <p>You meet an American online. Answer their question.</p>
+                <div class="phone-ui">
+                    <div class="phone-notch"></div>
+                    <div class="phone-top-bar"><i class="fa-solid fa-user" style="margin-right:8px; color:var(--accent);"></i> New Friend</div>
+                    <div class="phone-chat-area">
+                        <div class="phone-msg received">Hey <span class="dyn-name">Student</span>! Nice to meet you. What do you do for a living?</div>
+                        <div class="typing-indicator" id="typing-dot-1">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="phone-options-area" id="chat-opts-1">
+                        <button class="phone-opt-btn" onclick="window.advanceChat(this, true, 'chat-opts-1', 'typing-dot-1', 'p_chat1')">I am a student. I study at university.</button>
+                        <button class="phone-opt-btn" onclick="window.advanceChat(this, false, 'chat-opts-1', 'typing-dot-1')">I am student.</button>
+                    </div>
+                </div>
+                <div class="speaking-hub" id="p_chat1" style="display:none; margin-top:20px; text-align: left;">
+                    <p>Teacher: Good! Remember to always use "A" before the profession/status.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SECTION 4: PRODUCTION ================= -->
+
+        <!-- 21. NEW: THE ID CARD MAKER (TABLET) -->
+        <div class="slide" data-lock="true">
+            <div class="glass-panel" style="text-align:center; padding: 40px 60px;">
+                <h2><i class="fa-solid fa-id-card"></i> Make Your ID Badge</h2>
+                <p>You just got a new job! Fill in your details to print your badge.</p>
+                
+                <div class="tablet-wrapper">
+                    <div class="tablet-device">
+                        <div class="tablet-header"><i class="fa-solid fa-print" style="margin-right:8px;"></i> Badge Printer v2.0</div>
+                        <div class="tablet-body" id="tablet-body">
+                            <!-- Step 1: A or An -->
+                            <h3 style="color:#fff; margin-bottom: 10px; font-size:1.2rem; text-align:center;">Grammar Check:</h3>
+                            <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; color: #fff;">"I am ______"</p>
+                            <div style="display:flex; gap:15px; width:100%;">
+                                <button class="tablet-item-btn" onclick="startTabletStep(2, 'a', true, this)"><span class="tablet-item-title">A</span></button>
+                                <button class="tablet-item-btn" onclick="startTabletStep(2, 'an', true, this)"><span class="tablet-item-title">An</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="speaking-hub" id="p_tablet" style="display:none; margin-top:20px; text-align: left;">
+                    <p id="tablet-teacher-prompt">Teacher: Wait for the student to finish.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 22. ARENA: THE INTERVIEW -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="padding: 60px 80px;">
+                <h2><i class="fa-solid fa-gavel"></i> The Arena: Round 1</h2>
+                <p style="text-align: center;">Roleplay! Click the card.</p>
+                <div class="arena-grid" style="grid-template-columns:1fr; max-width:400px; margin:0 auto;">
+                    <div class="arena-card" onclick="this.classList.toggle('flipped'); document.getElementById('p_22_arena').style.display='block';">
+                        <div class="arena-card-inner">
+                            <div class="arena-card-front"><i class="fa-solid fa-handshake"></i><h3>THE INTERVIEW</h3></div>
+                            <div class="arena-card-back"><p>The teacher is an interviewer. They will ask you what you do. Answer with your REAL profession or study.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaking-hub" id="p_22_arena" style="display:none; width: 100%;">
+                    <p>Teacher: "So, <span class="dyn-name">Student</span>, nice to meet you. What do you do for a living?"</p>
+                    <div class="speaking-starter">
+                        <span class="starter-title">Student Starter</span>
+                        <span class="starter-phrase">"I am a..."</span>
+                        <span class="starter-phrase">"I work at..."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 23. ARENA: THE CUSTOMER -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="padding: 60px 80px;">
+                <h2><i class="fa-solid fa-gavel"></i> The Arena: Round 2</h2>
+                <p style="text-align: center;">Roleplay! Click the card.</p>
+                <div class="arena-grid" style="grid-template-columns:1fr; max-width:400px; margin:0 auto;">
+                    <div class="arena-card" onclick="this.classList.toggle('flipped'); document.getElementById('p_23_arena').style.display='block';">
+                        <div class="arena-card-inner">
+                            <div class="arena-card-front"><i class="fa-solid fa-mug-hot"></i><h3>THE COFFEE SHOP</h3></div>
+                            <div class="arena-card-back"><p>You are a Barista. The teacher is a customer. Welcome them to Starbucks and ask for their order.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaking-hub" id="p_23_arena" style="display:none; width: 100%;">
+                    <p>Teacher: Play along as the customer!</p>
+                    <div class="speaking-starter">
+                        <span class="starter-title">Student Starter</span>
+                        <span class="starter-phrase">"Hello! I am a barista here at Starbucks."</span>
+                        <span class="starter-phrase">"What do you want to drink?"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 24. THE FINAL PITCH -->
+        <div class="slide" data-hub="true">
+            <div class="glass-panel" style="text-align: center; padding: 60px 80px;">
+                <h2><i class="fa-solid fa-microphone"></i> The Final Pitch</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 25px;">You have <strong>60 seconds</strong> to present.</p>
+                <div style="background: rgba(0,0,0,0.5); padding: 40px; border-radius: 20px; border: 1px solid var(--accent); display: inline-block; text-align: left;">
+                    <ul style="color: #fff; font-size: 1.4rem; margin-left: 20px; line-height: 2;">
+                        <li>Say your name.</li>
+                        <li>Say what you do (I am a...).</li>
+                        <li>Say where you work or study (I work at...).</li>
+                    </ul>
+                </div>
+                <br><br>
+                <button class="btn-start" onclick="document.getElementById('p_24_pitch').style.display='block'">START PITCH</button>
+                <div class="speaking-hub" id="p_24_pitch" style="display:none; margin-top: 30px; text-align: left; width: 100%;">
+                    <p>Teacher: Listen and celebrate the student's description!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 25. MISSION COMPLETE -->
+        <div class="slide" data-hub="false">
+            <div class="glass-panel" style="text-align: center; padding: 80px 50px;">
+                <i class="fa-solid fa-briefcase" style="font-size: 6rem; color: var(--correct); margin-bottom: 25px; filter: drop-shadow(0 0 30px var(--correct));"></i>
+                <h1 style="font-size: 4.5rem; color: var(--correct); line-height: 1.1;">HIRED!</h1>
+                <p style="font-size: 1.4rem; color: #a3a3a3; margin-bottom: 40px;">You can now talk about your profession and workplace in English.</p>
+                
+                <div style="display: flex; gap: 25px; justify-content: center; flex-wrap: wrap;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 16px; border: 1px solid var(--glass-border); width: 250px;">
+                        <i class="fa-solid fa-user-tie" style="font-size: 2rem; color: var(--brand-main); margin-bottom: 15px;"></i>
+                        <h3 style="color: #fff; font-size: 1.2rem;">VOCAB</h3>
+                        <p style="font-size: 1rem; margin:0;">Professions & Workplaces</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 16px; border: 1px solid var(--glass-border); width: 250px;">
+                        <i class="fa-solid fa-microchip" style="font-size: 2rem; color: var(--brand-main); margin-bottom: 15px;"></i>
+                        <h3 style="color: #fff; font-size: 1.2rem;">GRAMMAR</h3>
+                        <p style="font-size: 1rem; margin:0;">A / An & "Work at"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER CONTROLS -->
+    <div class="progress-container"><div class="progress-bar"></div></div>
+    <div class="navbar" style="top: auto; bottom: 0; box-shadow: 0 -5px 30px rgba(0,0,0,0.5);">
+        <button class="icon-btn" id="prev-btn" onclick="window.prevSlide()" disabled style="width:auto; padding: 0 25px; font-family: var(--font-code); font-weight: bold; font-size: 1.2rem;"><i class="fa-solid fa-chevron-left" style="margin-right: 10px;"></i> BACK</button>
+        <div style="display: flex; align-items: center; gap: 25px;">
+            <div id="step-id" style="color: white; font-family: var(--font-code); font-size: 1.2rem; letter-spacing: 2px; font-weight: 700;">PAGE <span style="color: var(--brand-main); font-size: 1.4rem;">1</span> / 28</div>
+            <button class="btn-start" id="next-btn" onclick="window.nextSlide()" style="display: flex; align-items: center; gap: 10px; font-size: 1.2rem; padding: 15px 40px; box-shadow: none;">NEXT <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <!-- DICTIONARY SIDEBAR -->
+    <div class="sidebar-panel" id="vocab-panel" style="border-left-color: var(--accent);">
+        <button class="sidebar-close" onclick="window.toggleSidebar('vocab-panel')"><i class="fa-solid fa-xmark"></i></button>
+        <div id="asideContent" style="margin-top: 10px; padding-bottom: 30px; overflow-y: auto;">
+            <p style="font-family: var(--font-code); color: var(--brand-main); margin-bottom: 10px; font-weight: 700; letter-spacing: 1px;">// WOLF DICTIONARY</p>
+            <h1 id="v-word" class="dict-word">Word</h1>
+            
+            <div id="v-video-wrapper" class="dict-video-wrapper">
+                <iframe id="v-video" data-src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            
+            <div class="dict-label" style="color: #fff;">DEFINITION</div>
+            <p id="v-meaning" class="dict-text">Definition goes here.</p>
+            <div class="dict-label" style="color: #fff; margin-top: 20px;">EXAMPLE</div>
+            <p id="v-example" class="dict-example">...</p>
+            <div style="margin-top: 30px; background: rgba(0,0,0,0.6); border: 1px solid var(--accent); border-radius: 16px; padding: 25px; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+                <span style="position: absolute; top: -12px; left: 20px; background: var(--brand-main); color: #000; font-family: var(--font-code); font-weight: 900; font-size: 0.8rem; letter-spacing: 2px; padding: 6px 14px; border-radius: 6px;">🎙️ SPEAKING HUB</span>
+                <p id="v-question" style="color: #fff; font-size: 1.2rem; font-weight: 600; margin:0; line-height: 1.5;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHITEBOARD SIDEBAR -->
+    <div class="whiteboard-panel" id="whiteboardPanel">
+        <button onclick="window.toggleSidebar('whiteboardPanel')" style="position: absolute; top: 30px; right: 30px; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 45px; height: 45px; border-radius: 14px; cursor: pointer; transition: 0.3s;"><i class="fa-solid fa-xmark"></i></button>
+        <h2 style="font-size: 2.8rem; color: #fff; margin-bottom: 15px; font-family: var(--font-display); text-transform: uppercase;"><i class="fa-solid fa-chalkboard"></i> WHITEBOARD</h2>
+        <textarea placeholder="// Note down the student's speaking errors and extra vocabulary here..."></textarea>
+    </div>
+
+    <script>
+        // === A1 CAREERS DATA ===
+        const vocabData = {
+            'server': { def: 'A person who brings food in a restaurant (Waiter/Waitress).', ex: 'She is a server.', speak: 'Are servers polite in your country?', videoUrl: 'https://www.youtube.com/embed/Zg2_361CgzE?start=137&end=145&autoplay=1&mute=0' },
+            'restaurant': { def: 'A place to buy and eat meals.', ex: 'I work at a restaurant.', speak: 'What is your favorite restaurant?', videoUrl: null },
+            'food': { def: 'Things that people eat.', ex: 'The food is good here.', speak: 'Do you like fast food?', videoUrl: null },
+            'barista': { def: 'A person who makes and serves coffee.', ex: 'He is a barista.', speak: 'Do you know any baristas?', videoUrl: 'https://www.youtube.com/embed/Zg2_361CgzE?start=224&end=233&autoplay=1&mute=0' },
+            'coffee shop': { def: 'A small cafe that sells coffee and cakes.', ex: 'I study at the coffee shop.', speak: 'Do you study at coffee shops?', videoUrl: null },
+            'work at': { def: 'To have a job in a specific place/company.', ex: 'I work at Starbucks.', speak: 'Where do you work at?', videoUrl: 'https://www.youtube.com/embed/Zg2_361CgzE?start=224&end=233&autoplay=1&mute=0' },
+            'bartender': { def: 'A person who makes and serves drinks at a bar.', ex: 'Jacob is a bartender.', speak: 'Is it hard to be a bartender?', videoUrl: 'https://www.youtube.com/embed/Zg2_361CgzE?start=357&end=365&autoplay=1&mute=0' },
+            'bar': { def: 'A place where people buy and drink alcohol.', ex: 'They work at a bar.', speak: 'Do you like going to bars with friends?', videoUrl: null },
+            'for a living': { def: 'As a job to earn money.', ex: 'What do you do for a living?', speak: 'What do you do for a living?', videoUrl: 'https://www.youtube.com/embed/Zg2_361CgzE?start=357&end=365&autoplay=1&mute=0' }
+        };
+
+        let studentName = "Student";
+
+        window.saveNameAndStart = function() {
+            const input = document.getElementById('student-name-input');
+            if(input && input.value.trim() !== '') {
+                studentName = input.value.trim();
+            }
+            document.querySelectorAll('.dyn-name').forEach(el => {
+                el.innerText = studentName;
+            });
+            window.nextSlide();
+        }
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const currentStepEl = document.getElementById('step-id');
+        const progressBar = document.querySelector('.progress-bar');
+        
+        function update() {
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+
+            if(prevBtn) prevBtn.disabled = currentSlide === 0;
+            if(nextBtn) nextBtn.style.display = (currentSlide === slides.length - 1) ? 'none' : 'flex';
+
+            if(currentStepEl) currentStepEl.innerHTML = `PAGE <span style="color: var(--brand-main); font-size: 1.4rem;">${currentSlide + 1}</span> / ${slides.length}`;
+            if(progressBar) progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+            
+            const iframe = slides[currentSlide].querySelector('iframe');
+            if(iframe && (!iframe.src || iframe.src === '' || iframe.src === window.location.href)) {
+                iframe.src = iframe.getAttribute('data-src');
+            }
+        }
+
+        window.nextSlide = function() { if(currentSlide < slides.length - 1) { currentSlide++; update(); window.toggleSidebar('whiteboardPanel', false); document.getElementById('whiteboardPanel').classList.remove('open'); } }
+        window.prevSlide = function() { if(currentSlide > 0) { currentSlide--; update(); window.toggleSidebar('whiteboardPanel', false); document.getElementById('whiteboardPanel').classList.remove('open'); } }
+
+        window.genericCorrect = function(btn, isCorrect, promptIdStr) {
+            const parent = btn.parentElement;
+            
+            if(isCorrect) {
+                if(btn.tagName.toLowerCase() === 'span' || btn.tagName.toLowerCase() === 'button') {
+                    btn.style.backgroundColor = 'var(--correct)'; btn.style.color = '#000'; btn.style.borderColor = 'var(--correct)';
+                } else {
+                    btn.style.backgroundColor = 'rgba(16, 185, 129, 0.1)'; btn.style.borderColor = 'var(--correct)';
+                }
+                if (promptIdStr) document.getElementById(promptIdStr).style.display = 'block';
+                
+                // Unlock next slide if it was locked
+                const currentSlideEl = slides[currentSlide];
+                if(currentSlideEl.dataset.lock === 'true') {
+                    currentSlideEl.removeAttribute('data-lock');
+                }
+            } else {
+                if(btn.tagName.toLowerCase() === 'span' || btn.tagName.toLowerCase() === 'button') {
+                    btn.style.backgroundColor = 'var(--incorrect)'; btn.style.color = '#fff'; btn.style.borderColor = 'var(--incorrect)';
+                } else {
+                    btn.style.backgroundColor = 'rgba(239, 68, 68, 0.1)'; btn.style.borderColor = 'var(--incorrect)';
+                }
+                btn.style.animation = 'shake 0.4s';
+                setTimeout(() => {
+                    btn.style.animation = '';
+                    if(btn.tagName.toLowerCase() === 'span' || btn.tagName.toLowerCase() === 'button') {
+                        if (btn.classList.contains('tf-true')) {
+                            btn.style.backgroundColor = 'rgba(16, 185, 129, 0.2)'; btn.style.color = '#fff'; btn.style.borderColor = 'var(--correct)';
+                        } else if (btn.classList.contains('tf-false')) {
+                            btn.style.backgroundColor = 'rgba(239, 68, 68, 0.2)'; btn.style.color = '#fff'; btn.style.borderColor = 'var(--incorrect)';
+                        } else {
+                            btn.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'; btn.style.color = '#fff'; btn.style.borderColor = 'rgba(234, 179, 8, 0.3)';
+                        }
+                    }
+                }, 800);
+            }
+        }
+
+        window.switchGrammar = function(btn, sentence, label, sentenceId, certaintyId) {
+            let siblings = btn.parentElement.children;
+            for(let s of siblings) s.classList.remove('active');
+            btn.classList.add('active');
+            document.getElementById(sentenceId).innerText = sentence;
+            document.getElementById(certaintyId).innerText = label;
+        }
+
+        // --- NEW: TABLET SIMULATOR LOGIC (ID MAKER) ---
+        let tabletState = { article: '', job: '', place: '' };
+
+        window.startTabletStep = function(step, choice, isCorrect, btn) {
+            if(!isCorrect) {
+                btn.style.borderColor = 'var(--incorrect)';
+                btn.style.animation = 'shake 0.4s';
+                setTimeout(() => { btn.style.borderColor = 'var(--glass-border)'; btn.style.animation = ''; }, 500);
+                return;
+            }
+
+            const body = document.getElementById('tablet-body');
+
+            if (step === 2) {
+                tabletState.article = choice; // 'a' or 'an'
+                
+                body.innerHTML = `
+                    <h3 style="color:#fff; margin-bottom: 10px; font-size:1.2rem; text-align:center;">Select your Job:</h3>
+                    <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; color: #fff;">"I am ${tabletState.article} ______"</p>
+                    
+                    <button class="tablet-item-btn" onclick="startTabletStep(3, 'server', ${tabletState.article === 'a'}, this)">
+                        <div class="kiosk-item-info" style="text-align:center; width:100%;"><p class="tablet-item-title">Server</p></div>
+                    </button>
+                    <button class="tablet-item-btn" onclick="startTabletStep(3, 'engineer', ${tabletState.article === 'an'}, this)">
+                        <div class="kiosk-item-info" style="text-align:center; width:100%;"><p class="tablet-item-title">Engineer</p></div>
+                    </button>
+                    <button class="tablet-item-btn" onclick="startTabletStep(3, 'barista', ${tabletState.article === 'a'}, this)">
+                        <div class="kiosk-item-info" style="text-align:center; width:100%;"><p class="tablet-item-title">Barista</p></div>
+                    </button>
+                `;
+            } else if (step === 3) {
+                tabletState.job = choice;
+                
+                body.innerHTML = `
+                    <h3 style="color:#fff; margin-bottom: 10px; font-size:1.2rem; text-align:center;">Select your Workplace:</h3>
+                    <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; color: #fff;">"I work at ______"</p>
+                    
+                    <button class="tablet-item-btn" onclick="startTabletStep(4, 'Starbucks', true, this)">
+                        <div class="kiosk-item-info" style="text-align:center; width:100%;"><p class="tablet-item-title">Starbucks</p></div>
+                    </button>
+                    <button class="tablet-item-btn" onclick="startTabletStep(4, 'the Hospital', true, this)">
+                        <div class="kiosk-item-info" style="text-align:center; width:100%;"><p class="tablet-item-title">the Hospital</p></div>
+                    </button>
+                    <button class="tablet-item-btn" onclick="startTabletStep(4, 'a Restaurant', true, this)">
+                        <div class="kiosk-item-info" style="text-align:center; width:100%;"><p class="tablet-item-title">a Restaurant</p></div>
+                    </button>
+                `;
+            } else if (step === 4) {
+                tabletState.place = choice;
+                body.innerHTML = `
+                    <h3 style="color:#10b981; margin-bottom: 15px; font-size:1.4rem; text-align:center;"><i class="fa-solid fa-circle-check"></i> Badge Created!</h3>
+                    <div class="id-badge">
+                        <i class="fa-solid fa-user-circle" style="font-size: 4rem; color: #0f172a; margin-bottom: 10px;"></i>
+                        <h2 style="color: #0f172a; margin: 5px 0; font-size: 2rem;">${studentName}</h2>
+                        <p style="margin: 5px 0; color: #333; font-size: 1.3rem; font-weight: bold; text-transform: capitalize;">${tabletState.job}</p>
+                        <p style="margin: 5px 0; color: #555; font-size: 1.1rem; font-weight: normal;">Works at ${tabletState.place}</p>
+                    </div>
+                    <button class="btn-start" style="margin-top:20px; width:100%; justify-content:center;" onclick="unlockTabletEnd()">PRINT BADGE</button>
+                `;
+            }
+        };
+        
+        window.unlockTabletEnd = function() {
+            const prompt = document.getElementById('tablet-teacher-prompt');
+            prompt.innerHTML = `<strong>Teacher:</strong> Excellent! "I am ${tabletState.article} ${tabletState.job} and I work at ${tabletState.place}!"`;
+            document.getElementById('p_tablet').style.display = 'block';
+            slides[currentSlide].removeAttribute('data-lock');
+        };
+
+        window.buildState = {};
+        window.moveWord = function(chip, dzId, targetArrayStr, promptId) {
+            if(chip.classList.contains('used')) return;
+            
+            const targetArray = targetArrayStr.split(',');
+            const word = chip.innerText;
+            const dz = document.getElementById(dzId);
+            const newChip = document.createElement('div');
+            newChip.className = 'word-chip'; 
+            newChip.style.background = 'var(--brand-main)'; 
+            newChip.style.color = '#000'; 
+            newChip.style.borderColor = 'var(--brand-main)';
+            newChip.innerText = word;
+            
+            if (!chip.id) chip.id = 'chip_' + Math.random().toString(36).substr(2, 9);
+            newChip.dataset.sourceId = chip.id;
+            
+            newChip.onclick = function() {
+                if(dz.classList.contains('success')) return;
+                dz.removeChild(this); document.getElementById(this.dataset.sourceId).classList.remove('used');
+                const idx = window.buildState[dzId].lastIndexOf(this.innerText);
+                if(idx !== -1) window.buildState[dzId].splice(idx, 1);
+            };
+            
+            dz.appendChild(newChip); chip.classList.add('used');
+            if(!window.buildState[dzId]) window.buildState[dzId] = [];
+            window.buildState[dzId].push(word);
+
+            if(window.buildState[dzId].length === targetArray.length) {
+                if(JSON.stringify(window.buildState[dzId]) === JSON.stringify(targetArray)) {
+                    dz.classList.add('success'); 
+                    Array.from(dz.children).forEach(c => { c.style.background = 'var(--correct)'; c.style.color = '#000'; c.style.cursor = 'default'; c.style.borderColor = 'var(--correct)'; });
+                    if(promptId) document.getElementById(promptId).style.display = 'block';
+                } else {
+                    dz.style.borderColor = 'var(--incorrect)'; dz.style.animation = 'shake 0.4s';
+                    setTimeout(() => {
+                        dz.innerHTML = ''; dz.style.borderColor = 'rgba(255,255,255,0.3)'; dz.style.animation = ''; window.buildState[dzId] = []; chip.parentElement.querySelectorAll('.word-chip').forEach(c => c.classList.remove('used')); 
+                    }, 1000);
+                }
+            }
+        }
+        
+        window.catchBug = function(element, isBug, fixText, promptId) {
+            if(element.parentElement.classList.contains('solved')) return;
+
+            if (isBug) {
+                element.classList.add('caught');
+                element.innerText = fixText;
+                element.parentElement.classList.add('solved');
+                
+                Array.from(element.parentElement.children).forEach(child => {
+                    child.style.pointerEvents = 'none';
+                });
+
+                if(promptId) document.getElementById(promptId).style.display = 'block';
+            } else {
+                element.classList.add('wrong-click');
+                setTimeout(() => element.classList.remove('wrong-click'), 400);
+            }
+        };
+
+        // --- WORDWALL MATCH-UP GAME: JOBS ---
+        let wwMatchedJob = 0;
+        window.wwDragStart = function(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+        window.wwAllowDrop = function(ev) { ev.preventDefault(); }
+        window.wwDropJob = function(ev, targetMatch) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            var draggedEl = document.getElementById(data);
+            
+            if(draggedEl && draggedEl.dataset.match === targetMatch) {
+                ev.target.innerHTML = ''; 
+                ev.target.appendChild(draggedEl);
+                draggedEl.style.width = '100%';
+                draggedEl.style.margin = '0';
+                draggedEl.classList.add('matched');
+                draggedEl.setAttribute('draggable', false);
+                ev.target.style.borderColor = 'var(--correct)';
+                ev.target.style.background = 'rgba(16, 185, 129, 0.1)';
+                
+                wwMatchedJob++;
+                if(wwMatchedJob >= 3) {
+                    document.getElementById('p_match').style.display = 'block';
+                }
+            } else {
+                ev.target.style.animation = 'shake 0.4s';
+                ev.target.style.borderColor = 'var(--incorrect)';
+                setTimeout(()=> {
+                    ev.target.style.animation='';
+                    ev.target.style.borderColor = 'rgba(255,255,255,0.3)';
+                }, 400);
+            }
+        }
+
+        window.advanceChat = function(btn, isCorrect, optsId, dotId, promptId) {
+            if(!isCorrect) {
+                btn.style.backgroundColor = 'var(--incorrect)';
+                btn.style.color = '#fff';
+                btn.style.borderColor = 'var(--incorrect)';
+                btn.style.animation = 'shake 0.4s';
+                setTimeout(() => {
+                    btn.style.backgroundColor = 'rgba(30, 41, 59, 0.8)';
+                    btn.style.color = '#fff';
+                    btn.style.borderColor = 'var(--glass-border)';
+                    btn.style.animation = '';
+                }, 800);
+                return;
+            }
+            
+            const text = btn.innerText;
+            const optsContainer = document.getElementById(optsId);
+            const chatArea = optsContainer.previousElementSibling;
+            
+            optsContainer.innerHTML = '';
+            
+            const sentMsg = document.createElement('div');
+            sentMsg.className = 'phone-msg sent';
+            sentMsg.style.display = 'block';
+            sentMsg.innerText = text;
+            
+            const typingDot = document.getElementById(dotId);
+            if(typingDot) {
+                 chatArea.insertBefore(sentMsg, typingDot);
+            } else {
+                 chatArea.appendChild(sentMsg);
+            }
+            
+            chatArea.scrollTop = chatArea.scrollHeight;
+            if(promptId) setTimeout(() => { document.getElementById(promptId).style.display = 'block'; }, 500); 
+        };
+
+        window.toggleSidebar = function(id) {
+            let el = document.getElementById(id);
+            if(el.classList.contains('open') || el.classList.contains('right-open')) {
+                el.classList.remove('open', 'right-open');
+                if(id === 'vocab-panel') {
+                    const videoIframe = document.getElementById('v-video');
+                    if (videoIframe) videoIframe.src = ''; 
+                }
+            } else {
+                document.querySelectorAll('.sidebar-panel, .whiteboard-panel').forEach(p => p.classList.remove('open', 'right-open'));
+                el.classList.add(id === 'vocab-panel' ? 'right-open' : 'open');
+            }
+        };
+
+        window.openVocab = function(word, promptId) {
+            const data = vocabData[word.toLowerCase()];
+            if(data) {
+                document.getElementById('v-word').innerText = word.toUpperCase();
+                document.getElementById('v-meaning').innerText = data.def;
+                document.getElementById('v-example').innerText = `"${data.ex}"`;
+                document.getElementById('v-question').innerText = data.speak || '';
+                
+                const videoWrapper = document.getElementById('v-video-wrapper');
+                const videoIframe = document.getElementById('v-video');
+                
+                if (data.videoUrl) {
+                    videoIframe.src = data.videoUrl;
+                    videoWrapper.style.display = 'block';
+                } else {
+                    videoWrapper.style.display = 'none';
+                    videoIframe.src = '';
+                }
+                
+                document.getElementById('vocab-panel').classList.add('right-open');
+                if(promptId) document.getElementById(promptId).style.display = 'block';
+            }
+        };
+
+        function toggleFullscreen() { try { if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(()=>{}); } else { document.exitFullscreen(); } } catch (err) {} }
+
+        window.onload = () => {
+            update();
+        };
+    </script>
+</body>
+</html>
